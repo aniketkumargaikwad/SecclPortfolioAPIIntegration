@@ -1,6 +1,7 @@
 ﻿@page "/portfolio-dashboard"
+@using P1SecclApp.FrontendWasm.Models           @* For AggregatedPortfolioTotal, etc. *@
+@using P1SecclApp.FrontendWasm.Services         @* <<< THIS LINE IS THE FIX *@
 @inject IPortfolioDataService PortfolioService
-@using P1SecclApp.FrontendWasm.Models
 
 <PageTitle>Portfolio Dashboard</PageTitle>
 
@@ -13,7 +14,6 @@
     <input type="text" class="form-control" id="portfolioIdsInput" @bind="portfolioIdsInput" />
     <button class="btn btn-primary mt-2" @onclick="LoadData">Load Portfolio Data</button>
 </div>
-
 
 @if (isLoading)
 {
@@ -93,13 +93,6 @@ else
     private string? errorMessage;
     private string portfolioIdsInput = "DEMO_PORTFOLIO_ID_1,DEMO_PORTFOLIO_ID_2,DEMO_PORTFOLIO_ID_3"; // Default example, can be changed by user
 
-    // This method is called when the component is first initialized.
-    // Let's change to load data on button click instead for more control.
-    // protected override async Task OnInitializedAsync()
-    // {
-    // await LoadData();
-    // }
-
     private async Task LoadData()
     {
         isLoading = true;
@@ -115,9 +108,6 @@ else
 
         try
         {
-            // If ids list is empty after split, the service will use its defaults if implemented that way,
-            // or you might choose to not call if ids is empty and portfolioIdsInput was also empty.
-            // Our backend API uses defaults if 'ids' parameter is not present or empty.
             aggregatedTotal = await PortfolioService.GetAggregatedTotalAsync(ids);
             aggregatedByAccountType = await PortfolioService.GetAggregatedByAccountTypeAsync(ids);
 

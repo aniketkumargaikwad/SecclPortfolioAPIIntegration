@@ -21,7 +21,7 @@ if (builder.HostEnvironment.IsDevelopment())
     // Replace with your actual BackendApi HTTPS URL if different from the Blazor app's base
     // Typically, BackendApi runs on a different port.
     // Find your BackendApi's HTTPS port from its Properties/launchSettings.json
-    backendApiUrl = "https://localhost:7258"; // <<< !!! UPDATE THIS PORT !!! (Check your BackendApi launchSettings.json https profile applicationUrl)
+    backendApiUrl = "https://localhost:7139"; // <<< !!! UPDATE THIS PORT !!! (Check your BackendApi launchSettings.json https profile applicationUrl)
 }
 
 
