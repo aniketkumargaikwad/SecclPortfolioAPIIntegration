@@ -13,4 +13,8 @@
     <PackageReference Include="System.Text.Json" Version="9.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\P1SecclApp.Core\P1SecclApp.Core.csproj" />
+  </ItemGroup>
+
 </Project>
