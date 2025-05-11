@@ -1,0 +1,54 @@
+name: Deploy Blazor WASM to GitHub Pages
+
+# Run on pushes to the main branch
+on:
+  push:
+    branches: [ main ] # Or master, or whatever your default branch is
+
+# Allow this job to clone the repo and create a page deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x' # Use the .NET version your project targets
+
+    - name: Publish Blazor WASM App
+      # Note the path to your Blazor WASM project's .csproj file
+      # It's inside the P1SecclApp folder
+      run: dotnet publish P1SecclApp/P1SecclApp.FrontendWasm/P1SecclApp.FrontendWasm.csproj --configuration Release --output publish_output
+
+    - name: Rewrite base href for GitHub Pages
+      # This step is crucial for Blazor WASM apps on GitHub Pages project sites.
+      # It changes <base href="/" /> to <base href="/your-repo-name/" />
+      # Replace 'SecclPortfolioAPIIntegration' with your actual repository name if different.
+      # The output of the publish command places files in publish_output/wwwroot
+      run: |
+        REPO_NAME="${{ github.event.repository.name }}"
+        sed -i "s|<base href=\"/\" />|<base href=\"/$REPO_NAME/\" />|" publish_output/wwwroot/index.html
+        echo "Rewrote base href in publish_output/wwwroot/index.html to /$REPO_NAME/"
+
+    - name: Upload GitHub Pages artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        # Path to the directory of static files to deploy
+        # This should be the wwwroot folder inside your publish output
+        path: ./publish_output/wwwroot
+
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
