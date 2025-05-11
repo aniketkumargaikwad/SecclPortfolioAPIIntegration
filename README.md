@@ -4,7 +4,7 @@ This project is a solution for the P1 technical test, demonstrating an integrati
 
 ## Tech Stack
 
-* **Backend API:** ASP.NET Core 8 Minimal API (C#)
+* **Backend API :** ASP.NET Core 8 Minimal API (C#)
 * **Core Logic/Middleware:** .NET 8 Class Library (C#) - Handles SECCL API communication and data aggregation.
 * **Frontend UI:** Blazor WebAssembly (.NET 8, C#)
 * **Development Environment:** Visual Studio 2022 Community Edition
