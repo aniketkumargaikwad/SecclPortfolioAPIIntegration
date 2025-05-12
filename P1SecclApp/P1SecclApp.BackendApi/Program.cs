@@ -38,7 +38,28 @@ builder.Services.AddCors(options =>
 });
 // **** OUR CHANGES END HERE ****
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowBlazorApp", // This is the policy name
+        policy =>
+        {
+            // OLD/PREVIOUS EXAMPLE:
+            // policy.WithOrigins("https://localhost:7123", "http://localhost:5123")
+            //       .AllowAnyHeader()
+            //       .AllowAnyMethod();
+
+            // **** UPDATE THIS LINE ****
+            // Add the origin for your Blazor WASM app (https://localhost:7240)
+            // If your Blazor app also has an HTTP URL (e.g., http://localhost:XXXX), add that too.
+            policy.WithOrigins("https://localhost:7240") // <<< ADD/UPDATE THIS
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
+
 var app = builder.Build();
+
+app.UseCors("AllowBlazorApp");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
