@@ -1,8 +1,4 @@
-﻿// P1SecclApp.FrontendWasm/Services/PortfolioDataService.cs
-using System.Net.Http;
-using System.Net.Http.Json; // For GetFromJsonAsync
-using System.Threading.Tasks;
-using System.Collections.Generic; // For List
+﻿using System.Net.Http.Json; // For GetFromJsonAsync
 using P1SecclApp.FrontendWasm.Models; // Our frontend models
 
 namespace P1SecclApp.FrontendWasm.Services

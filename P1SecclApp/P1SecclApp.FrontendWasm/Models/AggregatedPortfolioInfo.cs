@@ -1,6 +1,4 @@
-﻿// P1SecclApp.FrontendWasm/Models/AggregatedPortfolioInfo.cs
-// These should match the DTOs returned by your BackendApi
-namespace P1SecclApp.FrontendWasm.Models
+﻿namespace P1SecclApp.FrontendWasm.Models
 {
     public class AggregatedPortfolioTotal
     {

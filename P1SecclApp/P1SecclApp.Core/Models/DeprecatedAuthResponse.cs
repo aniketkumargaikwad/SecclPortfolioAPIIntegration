@@ -16,7 +16,7 @@ namespace P1SecclApp.Core.Models
         public string? UserType { get; set; }
 
         [JsonPropertyName("scopes")]
-        public List<string>? Scopes { get; set; }
+        public List<SecclScope>? Scopes { get; set; }
 
         [JsonPropertyName("services")]
         public List<string>? Services { get; set; }

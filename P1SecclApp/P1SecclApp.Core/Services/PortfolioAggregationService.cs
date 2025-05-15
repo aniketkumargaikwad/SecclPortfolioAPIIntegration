@@ -77,7 +77,7 @@ namespace P1SecclApp.Core.Services
                 Console.WriteLine("[PortfolioAggregationService] Successfully obtained real access token.");
             }
 
-            decimal totalValue = 0;
+            decimal totalValue = 0;  
             var portfolioIdsIncludedInAggregation = new List<string>();
             int portfolioIndex = 0;
 
